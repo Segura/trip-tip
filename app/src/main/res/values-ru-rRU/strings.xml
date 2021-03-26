@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TripTip</string>
+    <string name="distance_units_nm">Морские мили</string>
+    <string name="distance_units_title">Расстояние</string>
+    <string name="units">Единицы измерений</string>
+    <string name="action_settings">Настройки</string>
+    <string name="app_description_short">Походный помощник</string>
+    <string name="navigation_drawer_open">Открыть</string>
+    <string name="navigation_drawer_close">Закрыть</string>
+    <string name="distance_units_km">Километры</string>
+    <string name="speed_units_knots">Узлы</string>
+    <string name="speed_units_kmh">Километры в час</string>
+    <string name="speed_units_title">Скорость</string>
+    <string name="summary_title">Сводка</string>
+    <string name="food_title">Продукты</string>
+    <string name="info_title">Информация</string>
+    <string name="weather_title">Погода</string>
+    <string name="route_title">Маршрут</string>
+</resources>

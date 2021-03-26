@@ -1,0 +1,21 @@
+<resources>
+    <string-array name="distance_units_entries">
+        <item>@string/distance_units_km</item>
+        <item>@string/distance_units_nm</item>
+    </string-array>
+
+    <string-array name="distance_units_values">
+        <item>km</item>
+        <item>nm</item>
+    </string-array>
+
+    <string-array name="speed_units_entries">
+        <item>@string/speed_units_kmh</item>
+        <item>@string/speed_units_knots</item>
+    </string-array>
+
+    <string-array name="speed_units_values">
+        <item>kmh</item>
+        <item>kn</item>
+    </string-array>
+</resources>

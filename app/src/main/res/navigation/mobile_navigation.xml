@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_summary">
+
+    <fragment
+        android:id="@+id/navigation_summary"
+        android:name="org.segura.triptip.fragments.SummaryFragment"
+        android:label="@string/summary_title"
+        tools:layout="@layout/fragment_summary" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_route"
+        android:name="org.segura.triptip.fragments.RouteFragment"
+        android:label="@string/route_title"
+        tools:layout="@layout/fragment_route" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_weather"
+        android:name="org.segura.triptip.fragments.WeatherFragment"
+        android:label="@string/weather_title"
+        tools:layout="@layout/fragment_weather" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_food"
+        android:name="org.segura.triptip.fragments.FoodFragment"
+        android:label="@string/food_title"
+        tools:layout="@layout/fragment_food" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_info"
+        android:name="org.segura.triptip.fragments.InfoFragment"
+        android:label="@string/info_title"
+        tools:layout="@layout/fragment_info" >
+    </fragment>
+</navigation>
