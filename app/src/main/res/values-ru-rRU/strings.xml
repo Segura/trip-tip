@@ -17,4 +17,27 @@
     <string name="info_title">Информация</string>
     <string name="weather_title">Погода</string>
     <string name="route_title">Маршрут</string>
+    <string name="action_archive">Архив</string>
+    <string name="action_information">Информация</string>
+    <string name="travel_title">Название</string>
+    <string name="travel_create">Создать</string>
+    <string name="activity_create_title">Создать новое путешествие</string>
+    <string name="travel_dates">Даты</string>
+    <string name="travel_from">С</string>
+    <string name="travel_start">С</string>
+    <string name="travel_end">По</string>
+    <string name="select_start_date">Выберите дату начала</string>
+    <string name="select_end_date">Выберите дату окончания</string>
+    <string name="edit">Редактировать</string>
+    <string name="travel_people">Человек</string>
+    <string name="travel_days">Дней</string>
+    <string name="travel_water_per_peopl_per_day">Воды на человека в день</string>
+    <string name="travel_comment">Комментарий</string>
+    <string name="travel_next">Дальше</string>
+    <string name="weather_index">Точка №%1$d</string>
+    <string name="weather_temperature">%1$d°C</string>
+    <string name="weather_wind">Ветер %1$d° %2$d м/с порывы до %3$d м/с</string>
+    <string name="travel_summary_text">Маршрут из %1$d точек на %2$d дней и %3$d человек, необходимо %4$d литров воды</string>
+    <string name="remove_markers">Удалить все маркеры</string>
+    <string name="my_location">Моё местоположение</string>
 </resources>

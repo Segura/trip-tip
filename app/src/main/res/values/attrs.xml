@@ -1,0 +1,20 @@
+<resources>
+    <declare-styleable name="WaypointWeather">
+        <attr name="index" format="integer" />
+        <attr name="temperature" format="integer" />
+        <attr name="icon" format="reference" />
+        <attr name="datetime" format="enum">
+            <enum name="day" value="0" />
+            <enum name="night" value="1" />
+        </attr>
+        <attr name="windDegree" format="integer" />
+        <attr name="windSpeed" format="float" />
+        <attr name="windGust" format="float" />
+        <attr name="description" format="string" />
+        <attr name="waypointWeatherViewStyle" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="WeatherIcon">
+        <attr name="sun" format="color" />
+    </declare-styleable>
+</resources>

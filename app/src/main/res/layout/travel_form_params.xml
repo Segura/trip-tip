@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="travelParams"
+            type="org.segura.triptip.model.form.TravelParamsViewModel" />
+        <import type="org.segura.triptip.model.form.Converter" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/people_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/travel_people"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
+            android:text="@={Converter.intToString(travelParams.people)}" />
+
+        <EditText
+            android:id="@+id/days_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/travel_days"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
+            android:text="@={Converter.intToString(travelParams.days)}" />
+
+        <EditText
+            android:id="@+id/water_per_people_per_day_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/travel_water_per_peopl_per_day"
+            android:importantForAutofill="no"
+            android:inputType="numberDecimal"
+            android:text="@={Converter.intToString(travelParams.waterPerPeoplePerDay)}" />
+
+        <EditText
+            android:id="@+id/comment_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/travel_comment"
+            android:importantForAutofill="no"
+            android:inputType="textCapSentences"
+            android:text="@={travelParams.comment}" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/next_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="@{travelParams.validMediator}"
+            android:text="@string/travel_next" />
+
+    </LinearLayout>
+</layout>

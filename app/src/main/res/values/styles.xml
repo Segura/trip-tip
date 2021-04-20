@@ -1,0 +1,14 @@
+<resources>
+    <style name="Widget.Theme.TripTip.WaypointWeather" parent="">
+        <item name="android:background">@color/teal_200</item>
+    </style>
+
+    <style name="WeatherIcon">
+        <item name="sun">@color/weatherIconSunDay</item>
+    </style>
+
+    <style name="WeatherIcon.Night" parent="WeatherIcon">
+        <item name="sun">@color/weatherIconSunNight</item>
+    </style>
+
+</resources>

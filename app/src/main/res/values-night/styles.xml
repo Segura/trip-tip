@@ -1,0 +1,5 @@
+<resources>
+    <style name="Widget.Theme.TripTip.WaypointWeather" parent="">
+        <item name="android:background">@color/purple_200</item>
+    </style>
+</resources>

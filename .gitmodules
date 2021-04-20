@@ -1,0 +1,3 @@
+[submodule "styles/cinnabar"]
+	path = styles/cinnabar
+	url = git@github.com:tangrams/cinnabar-style.git

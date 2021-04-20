@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="travelMain"
+            type="org.segura.triptip.model.form.TravelMainViewModel" />
+        <import type="org.segura.triptip.model.form.Converter" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/title_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/travel_title"
+            android:importantForAutofill="no"
+            android:inputType="textCapSentences"
+            android:text="@={travelMain.title}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/start_date_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/select_start_date"
+                    android:src="@drawable/ic_date" />
+
+                <EditText
+                    android:id="@+id/start_date_field"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/travel_start"
+                    android:importantForAutofill="no"
+                    android:focusable="false"
+                    android:inputType="date"
+                    app:date="@{travelMain.start}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/end_date_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/select_end_date"
+                    android:src="@drawable/ic_date" />
+
+                <EditText
+                    android:id="@+id/end_date_field"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/travel_end"
+                    android:importantForAutofill="no"
+                    android:focusable="false"
+                    android:inputType="date"
+                    app:date="@{travelMain.end}" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/next_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="@{travelMain.validMediator}"
+            android:text="@string/travel_next" />
+
+    </LinearLayout>
+</layout>

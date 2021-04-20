@@ -17,4 +17,27 @@
     <string name="weather_title">Weather</string>
     <string name="food_title">Food</string>
     <string name="info_title">Information</string>
+    <string name="action_archive">Archive</string>
+    <string name="action_information">Information</string>
+    <string name="travel_title">Title</string>
+    <string name="travel_create">Create</string>
+    <string name="activity_create_title">Create new travel</string>
+    <string name="travel_dates">Dates</string>
+    <string name="travel_from">From</string>
+    <string name="travel_start">Start</string>
+    <string name="travel_end">End</string>
+    <string name="select_start_date">Select start date</string>
+    <string name="select_end_date">Select end date</string>
+    <string name="edit">Edit</string>
+    <string name="travel_people">Peoples</string>
+    <string name="travel_days">Days</string>
+    <string name="travel_water_per_peopl_per_day">Water per people per day</string>
+    <string name="travel_comment">Comment</string>
+    <string name="travel_next">Next</string>
+    <string name="travel_summary_text">Route of %1$d stops for %2$d days and %3$d people, total amount of water is %4$d liters</string>
+    <string name="weather_index">Waypoint #%1$d</string>
+    <string name="weather_temperature">%1$d°C</string>
+    <string name="weather_wind">Wind %1$d° %2$d m/s up to %3$d m/s</string>
+    <string name="my_location">My location</string>
+    <string name="remove_markers">Remove markers</string>
 </resources>

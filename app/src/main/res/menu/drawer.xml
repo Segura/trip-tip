@@ -3,12 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:id="@+id/trips" android:checkableBehavior="single" />
+    <group
+        android:id="@+id/trips"
+        android:checkableBehavior="single"
+        android:orderInCategory="1" />
 
-    <group android:id="@+id/other">
+    <group
+        android:id="@+id/other"
+        android:orderInCategory="2">
+        <item
+            android:id="@+id/action_archive"
+            android:icon="@drawable/ic_archive"
+            android:title="@string/action_archive" />
+        <item
+            android:id="@+id/action_information"
+            android:enabled="false"
+            android:icon="@drawable/ic_information"
+            android:title="@string/action_information" />
         <item
             android:id="@+id/action_settings"
-            android:icon="@android:drawable/ic_menu_preferences"
+            android:icon="@drawable/ic_settings"
             android:title="@string/action_settings" />
     </group>
 </menu>

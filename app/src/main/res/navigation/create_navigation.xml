@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/create_navigation"
+    app:startDestination="@+id/navigation_create_main">
+
+    <fragment
+        android:id="@+id/navigation_create_main"
+        android:name="org.segura.triptip.fragments.create.CreateMainFragment"
+        android:label="Main"
+        tools:layout="@layout/travel_form_main">
+        <action
+            android:id="@+id/action_next"
+            app:destination="@id/navigation_create_params" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_create_params"
+        android:name="org.segura.triptip.fragments.create.CreateParamsFragment"
+        android:label="Params"
+        tools:layout="@layout/travel_form_params">
+        <action
+            android:id="@+id/action_next"
+            app:destination="@id/navigation_create_route" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_create_route"
+        android:name="org.segura.triptip.fragments.create.CreateRouteFragment"
+        android:label="Route"
+        tools:layout="@layout/travel_form_route"
+        >
+        <action
+            android:id="@+id/action_next"
+            app:destination="@id/navigation_create_summary" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_create_summary"
+        android:name="org.segura.triptip.fragments.create.CreateSummaryFragment"
+        android:label="Summary"
+        tools:layout="@layout/travel_form_summary" />
+</navigation>

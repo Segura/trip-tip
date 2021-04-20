@@ -9,34 +9,29 @@
         android:id="@+id/navigation_summary"
         android:name="org.segura.triptip.fragments.SummaryFragment"
         android:label="@string/summary_title"
-        tools:layout="@layout/fragment_summary" >
-    </fragment>
+        tools:layout="@layout/fragment_summary" />
 
     <fragment
         android:id="@+id/navigation_route"
         android:name="org.segura.triptip.fragments.RouteFragment"
         android:label="@string/route_title"
-        tools:layout="@layout/fragment_route" >
-    </fragment>
+        tools:layout="@layout/fragment_route" />
 
     <fragment
         android:id="@+id/navigation_weather"
         android:name="org.segura.triptip.fragments.WeatherFragment"
         android:label="@string/weather_title"
-        tools:layout="@layout/fragment_weather" >
-    </fragment>
+        tools:layout="@layout/fragment_weather" />
 
     <fragment
         android:id="@+id/navigation_food"
         android:name="org.segura.triptip.fragments.FoodFragment"
         android:label="@string/food_title"
-        tools:layout="@layout/fragment_food" >
-    </fragment>
+        tools:layout="@layout/fragment_food" />
 
     <fragment
         android:id="@+id/navigation_info"
         android:name="org.segura.triptip.fragments.InfoFragment"
         android:label="@string/info_title"
-        tools:layout="@layout/fragment_info" >
-    </fragment>
+        tools:layout="@layout/fragment_info" />
 </navigation>
