@@ -22,17 +22,19 @@ class WaypointWeather : View {
     private var _index: Int = 0
     private var _temperature: Int = 0
     private var _icon_id: Int = 0
-    private var _icon: Drawable? = null
+    private var _conditionIcon: Drawable? = null
     private var _description: String? = null
     private var _windDegree: Int = -1
     private var _windSpeed: Float = 0f
-    private var _windGust: Float = 0f
+    private var _windGust: Float? = null
     private var _daytime: WeatherIconDaytime = WeatherIconDaytime.DAY
 
     private lateinit var indexTextPaint: TextPaint
     private lateinit var temperatureTextPaint: TextPaint
     private lateinit var descriptionTextPaint: TextPaint
     private lateinit var windTextPaint: TextPaint
+    private lateinit var windIcon: Drawable
+    private lateinit var windDirectionIcon: Drawable
     private var iconRect = Rect()
 
     var index: Int
@@ -48,20 +50,24 @@ class WaypointWeather : View {
         }
 
     var icon: Drawable?
-        get() = _icon
+        get() = _conditionIcon
         set(value) {
-            _icon = value
-            _icon?.let {
+            _conditionIcon = value
+            _conditionIcon?.let {
                 it.callback = this
                 applyIconTheme()
             }
         }
 
     private fun applyIconTheme() {
-        _icon?.applyTheme(ContextThemeWrapper(context, when(_daytime) {
-            WeatherIconDaytime.NIGHT -> R.style.WeatherIcon_Night
-            else -> R.style.WeatherIcon
-        }).theme)
+        _conditionIcon?.applyTheme(
+            ContextThemeWrapper(
+                context, when (_daytime) {
+                    WeatherIconDaytime.NIGHT -> R.style.WeatherIcon_Night
+                    else -> R.style.WeatherIcon
+                }
+            ).theme
+        )
     }
 
     var iconId: Int
@@ -91,7 +97,7 @@ class WaypointWeather : View {
             _windSpeed = value
         }
 
-    var windGust: Float
+    var windGust: Float?
         get() = _windGust
         set(value) {
             _windGust = value
@@ -100,8 +106,8 @@ class WaypointWeather : View {
     var daytime: WeatherIconDaytime
         get() = _daytime
         set(value) {
-           _daytime = value
-           applyIconTheme()
+            _daytime = value
+            applyIconTheme()
         }
 
     val indexText: String
@@ -111,7 +117,13 @@ class WaypointWeather : View {
         get() = resources.getString(R.string.weather_temperature, _temperature)
 
     val windText: String
-        get() = resources.getString(R.string.weather_wind, _windDegree, _windSpeed.toInt(), _windGust.toInt())
+        get() {
+            _windGust?.let {
+                return resources.getString(R.string.weather_wind_with_gust, _windSpeed.toInt(), _windGust!!.toInt())
+            }
+            return resources.getString(R.string.weather_wind, _windSpeed.toInt())
+        }
+
 
     constructor(context: Context) : super(context) {
         init(null)
@@ -130,31 +142,6 @@ class WaypointWeather : View {
             attrs, R.styleable.WaypointWeather, DEFAULT_STYLE_ATTR, DEFAULT_STYLE_RES
         )
 
-        indexTextPaint = TextPaint().apply {
-            flags = Paint.ANTI_ALIAS_FLAG
-            textAlign = Paint.Align.LEFT
-            color = resources.getColor(R.color.black)
-            textSize = dpToPx(16f)
-        }
-        temperatureTextPaint = TextPaint().apply {
-            flags = Paint.ANTI_ALIAS_FLAG
-            textAlign = Paint.Align.LEFT
-            color = resources.getColor(R.color.black)
-            textSize = dpToPx(32f)
-        }
-        descriptionTextPaint = TextPaint().apply {
-            flags = Paint.ANTI_ALIAS_FLAG
-            textAlign = Paint.Align.CENTER
-            color = resources.getColor(R.color.black)
-            textSize = dpToPx(12f)
-        }
-        windTextPaint = TextPaint().apply {
-            flags = Paint.ANTI_ALIAS_FLAG
-            textAlign = Paint.Align.LEFT
-            color = resources.getColor(R.color.black)
-            textSize = dpToPx(12f)
-        }
-
         index = a.getInteger(R.styleable.WaypointWeather_index, 0)
         temperature = a.getInteger(R.styleable.WaypointWeather_temperature, 0)
         icon = a.getDrawable(R.styleable.WaypointWeather_icon)
@@ -163,8 +150,23 @@ class WaypointWeather : View {
         windSpeed = a.getFloat(R.styleable.WaypointWeather_windSpeed, 0f)
         windGust = a.getFloat(R.styleable.WaypointWeather_windGust, 0f)
         daytime = WeatherIconDaytime.values()[(a.getInteger(R.styleable.WaypointWeather_datetime, WeatherIconDaytime.DAY.ordinal))]
+        val defaultColor = resources.getColor(R.color.black, null)
+        val textColor = a.getColor(R.styleable.WaypointWeather_textColor, defaultColor)
+        val iconColor = a.getColor(R.styleable.WaypointWeather_windIconColor, defaultColor)
 
         a.recycle()
+
+        indexTextPaint = createTextPaint(Paint.Align.LEFT, textColor, 16f)
+        temperatureTextPaint = createTextPaint(Paint.Align.LEFT, textColor, 32f)
+        descriptionTextPaint = createTextPaint(Paint.Align.CENTER, textColor, 12f)
+        windTextPaint = createTextPaint(Paint.Align.LEFT, textColor, 16f)
+
+        windIcon = AppCompatResources.getDrawable(context, R.drawable.ic_wind)!!.apply {
+            this.setTint(iconColor)
+        }
+        windDirectionIcon = AppCompatResources.getDrawable(context, R.drawable.ic_wind_direction)!!.apply {
+            this.setTint(iconColor)
+        }
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -174,18 +176,16 @@ class WaypointWeather : View {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-
         val padding = 0.1f * width
 
-        iconRect = iconRect.apply {
-            set(0, 0, (width * 0.4f).toInt(), (width * 0.4f).toInt())
-            offset(padding.toInt(), (width * 0.2f).toInt())
-        }
-
-        _icon?.let {
-            it.bounds = iconRect
+        _conditionIcon?.let {
+            it.bounds = iconRect.apply {
+                set(0, 0, (width * 0.4f).toInt(), (width * 0.4f).toInt())
+                offset(padding.toInt(), (width * 0.2f).toInt())
+            }
             it.draw(canvas)
         }
+
         canvas.drawText(
             indexText,
             padding,
@@ -207,12 +207,41 @@ class WaypointWeather : View {
             )
         }
         if (windDegree >= 0) {
+            iconRect.apply {
+                set(0, 0, (width * 0.1f).toInt(), (width * 0.1f).toInt())
+                offset(padding.toInt(), (width * 0.7f).toInt())
+            }
+            windIcon.let {
+                it.bounds = iconRect
+                it.draw(canvas)
+            }
+
+            canvas.save()
+            iconRect.apply {
+                offset((width * 0.15f).toInt(), 0)
+            }
+            canvas.rotate(_windDegree.toFloat(), iconRect.exactCenterX(), iconRect.exactCenterY())
+            windDirectionIcon.let {
+                it.bounds = iconRect
+                it.draw(canvas)
+            }
+            canvas.restore()
+
             canvas.drawText(
                 windText,
-                padding,
-                width * 0.8f,
+                padding + width * 0.3f,
+                width * 0.75f - ((windTextPaint.descent() + windTextPaint.ascent()) / 2),
                 windTextPaint
             )
+        }
+    }
+
+    private fun createTextPaint(align: Paint.Align, color: Int, textSize: Float): TextPaint {
+        return TextPaint().apply {
+            this.flags = Paint.ANTI_ALIAS_FLAG
+            this.textAlign = align
+            this.color = color
+            this.textSize = dpToPx(textSize)
         }
     }
 

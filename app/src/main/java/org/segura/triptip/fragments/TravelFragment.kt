@@ -15,7 +15,7 @@ abstract class TravelFragment : Fragment() {
 
     val travel: TravelViewModel by activityViewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
         val root = inflater.inflate(layout, container, false)
         travel.selectedItem.observe(viewLifecycleOwner, { item -> onTravelUpdate(root, item) })

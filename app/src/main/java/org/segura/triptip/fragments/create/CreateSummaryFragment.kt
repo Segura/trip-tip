@@ -58,7 +58,7 @@ class CreateSummaryFragment : Fragment() {
         root.findViewById<Button>(R.id.create_button).setOnClickListener {
             it.isEnabled = false
             lifecycleScope.launch {
-                TravelDatabase.getInstance(this@CreateSummaryFragment.requireContext()).travelDao().insertAll(newTravel)
+                TravelDatabase.getInstance(this@CreateSummaryFragment.requireContext()).travelDao().insert(newTravel)
                 // TODO: clear history
                 startActivity(Intent(this@CreateSummaryFragment.requireContext(), MainActivity::class.java))
             }

@@ -1,6 +1,7 @@
 <resources>
     <style name="Widget.Theme.TripTip.WaypointWeather" parent="">
-        <item name="android:background">@color/teal_200</item>
+        <item name="textColor">#292828</item>
+        <item name="windIconColor">#403D3D</item>
     </style>
 
     <style name="WeatherIcon">

@@ -54,21 +54,32 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             travels = db.travelDao().selectNonArchived()
             if (travels.isEmpty()) {
                 startActivity(Intent(this@MainActivity, CreateActivity::class.java))
+            } else {
+                addTravelsInDrawer()
+                viewModel.selectItem(travels.first())
             }
+        }
+    }
 
-            val navigationView: NavigationView = findViewById(R.id.drawer_menu)
-            for (travel in travels) {
-                navigationView.menu.add(
-                    R.id.trips,
-                    R.id.travel_id_salt xor travel.travel.travelId,
-                    Menu.FIRST,
-                    travel.travel.title + travel.travel.travelId
-                ).apply {
-                    setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-                    setIcon(R.drawable.ic_archive)
-                    isCheckable = true
-                    actionView = TravelMenuItem(this@MainActivity, travel)
-                }
+    private fun addTravelsInDrawer() {
+        val navigationView: NavigationView = findViewById(R.id.drawer_menu)
+        travels.forEachIndexed { index, travel ->
+            val icon = when (true) {
+                travel.travel.isBefore -> R.drawable.ic_before
+                travel.travel.isAfter -> R.drawable.ic_after
+                else -> R.drawable.ic_current
+            }
+            navigationView.menu.add(
+                R.id.trips,
+                R.id.travel_id_salt xor travel.travel.travelId,
+                Menu.FIRST,
+                travel.travel.title
+            ).apply {
+                setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
+                setIcon(icon)
+                isCheckable = true
+                isChecked = index == 0
+                actionView = TravelMenuItem(this@MainActivity, travel)
             }
         }
     }

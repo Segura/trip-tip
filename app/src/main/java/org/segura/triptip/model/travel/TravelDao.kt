@@ -9,11 +9,11 @@ import org.segura.triptip.model.route.RouteWithWaypointRef
 abstract class TravelDao(val db: TravelDatabase) {
 
     @Transaction
-    @Query("SELECT * FROM travels WHERE archived = 0")
+    @Query("SELECT * FROM travels WHERE archived = 0 ORDER BY start_at")
     abstract suspend fun selectNonArchived(): List<Travel>
 
     @Transaction
-    @Query("SELECT * FROM travels WHERE archived = 1")
+    @Query("SELECT * FROM travels WHERE archived = 1 ORDER BY start_at")
     abstract suspend fun selectArchived(): List<Travel>
 
     @Query("SELECT * FROM travels WHERE end_at < :date")
@@ -35,15 +35,13 @@ abstract class TravelDao(val db: TravelDatabase) {
     @Update
     abstract fun update(travel: BaseTravel)
 
-    suspend fun insertAll(vararg travels: Travel) {
-        for (travel in travels) {
-            val travelId = insert(travel.travel)
-            travel.route.route.travelId = travelId.toInt()
-            val routeId = db.routeDao().insert(travel.route.route)
-            for (waypoint in travel.route.waypoints) {
-                val waypointId = db.routeDao().insert(waypoint)
-                db.routeDao().insert(RouteWithWaypointRef(routeId.toInt(), waypointId.toInt()))
-            }
+    suspend fun insert(travel: Travel) {
+        val travelId = insert(travel.travel)
+        travel.route.route.travelId = travelId.toInt()
+        val routeId = db.routeDao().insert(travel.route.route)
+        for (waypoint in travel.route.waypoints) {
+            val waypointId = db.routeDao().insert(waypoint)
+            db.routeDao().insert(RouteWithWaypointRef(routeId.toInt(), waypointId.toInt()))
         }
     }
 

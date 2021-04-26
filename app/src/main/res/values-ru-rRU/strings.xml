@@ -36,8 +36,9 @@
     <string name="travel_next">Дальше</string>
     <string name="weather_index">Точка №%1$d</string>
     <string name="weather_temperature">%1$d°C</string>
-    <string name="weather_wind">Ветер %1$d° %2$d м/с порывы до %3$d м/с</string>
+    <string name="weather_wind_with_gust">%1$d м/с (%2$d м/с)</string>
     <string name="travel_summary_text">Маршрут из %1$d точек на %2$d дней и %3$d человек, необходимо %4$d литров воды</string>
     <string name="remove_markers">Удалить все маркеры</string>
     <string name="my_location">Моё местоположение</string>
+    <string name="weather_wind">%1$d м/с</string>
 </resources>

@@ -8,7 +8,7 @@ class WeatherMoment(data: JSONObject) {
     val temperature: Int
     val windDeg: Int
     val windSpeed: Float
-    val windGust: Float
+    val windGust: Float?
     val conditions: List<WeatherCondition>
 
     val mainCondition
@@ -18,7 +18,7 @@ class WeatherMoment(data: JSONObject) {
         temperature = data.getInt("temp")
         windDeg = data.getInt("wind_deg")
         windSpeed = data.getDouble("wind_speed").toFloat()
-        windGust = data.getDouble("wind_gust").toFloat()
+        windGust = if (data.has("wind_gust")) data.getDouble("wind_gust").toFloat() else null
 
         val rawWeatherConditions = data.get("weather") as JSONArray
         conditions = List(rawWeatherConditions.length()) {
