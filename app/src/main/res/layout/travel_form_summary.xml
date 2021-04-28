@@ -16,12 +16,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{travel.travel.title}"
+            android:text="@{travel.baseTravel.title}"
             tools:text="Some title" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{@string/travel_summary_text(travel.route.waypoints.size, travel.travel.params.days, travel.travel.params.people, travel.travel.params.water)}"
+            android:text="@{@string/travel_summary_text(travel.route.waypoints.size, travel.baseTravel.params.days, travel.baseTravel.params.people, travel.baseTravel.params.water)}"
             tools:text="1000km" />
 
         <Space

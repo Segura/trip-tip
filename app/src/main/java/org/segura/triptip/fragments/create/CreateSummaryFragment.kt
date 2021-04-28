@@ -22,6 +22,7 @@ import org.segura.triptip.model.form.TravelParamsViewModel
 import org.segura.triptip.model.form.TravelRouteViewModel
 import org.segura.triptip.model.params.Params
 import org.segura.triptip.model.route.RouteWithWaypoint
+import org.segura.triptip.model.travel.PreparingItem
 import org.segura.triptip.model.travel.Travel
 
 class CreateSummaryFragment : Fragment() {
@@ -35,22 +36,24 @@ class CreateSummaryFragment : Fragment() {
         val binding = DataBindingUtil.inflate<TravelFormSummaryBindingImpl>(layoutInflater, R.layout.travel_form_summary, container, false)
         val root = binding.root
 
+        val params = Params(
+            paramsModel.people.value!!,
+            paramsModel.days.value!!,
+            paramsModel.waterPerPeoplePerDay.value!!,
+            paramsModel.comment.value!!
+        )
         val newTravel = Travel(
             BaseTravel(
                 mainModel.title.value!!,
                 mainModel.start.value!!,
                 mainModel.end.value!!,
-                Params(
-                    paramsModel.people.value!!,
-                    paramsModel.days.value!!,
-                    paramsModel.waterPerPeoplePerDay.value!!,
-                    paramsModel.comment.value!!
-                )
+                params
             ),
             RouteWithWaypoint(
                 Route(),
                 routeModel.waypoints.value!!
-            )
+            ),
+            createPreparingList(params)
         )
         binding.travel = newTravel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -65,5 +68,11 @@ class CreateSummaryFragment : Fragment() {
         }
 
         return root
+    }
+
+    private fun createPreparingList(params: Params): List<PreparingItem> {
+        return listOf(
+            PreparingItem(resources.getString(R.string.preparing_item_water), params.water, resources.getString(R.string.preparing_item_unit_liter))
+        )
     }
 }

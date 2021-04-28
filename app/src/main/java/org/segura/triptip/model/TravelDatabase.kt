@@ -9,9 +9,11 @@ import org.segura.triptip.DATABASE_NAME
 import org.segura.triptip.model.route.RouteDao
 import org.segura.triptip.model.route.RouteWithWaypointRef
 import org.segura.triptip.model.route.Waypoint
+import org.segura.triptip.model.travel.PreparingItem
 import org.segura.triptip.model.travel.TravelDao
+import org.segura.triptip.model.travel.TravelToPreparingItemRef
 
-@Database(entities = [BaseTravel::class, Waypoint::class, Route::class, RouteWithWaypointRef::class], version = 8)
+@Database(entities = [BaseTravel::class, Waypoint::class, Route::class, RouteWithWaypointRef::class, PreparingItem::class, TravelToPreparingItemRef::class], version = 11)
 @TypeConverters(Converters::class)
 abstract class TravelDatabase : RoomDatabase() {
     abstract fun travelDao(): TravelDao

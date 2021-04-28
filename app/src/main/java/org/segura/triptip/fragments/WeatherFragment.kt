@@ -26,7 +26,7 @@ const val SUCCESS: Byte = 2
 
 class WeatherFragment : TravelFragment(), RequestQueue.RequestEventListener {
 
-    private val API_QUERY = "https://api.openweathermap.org/data/2.5/onecall?lat=%s&lon=%s&exclude=minutely&lang=%s&units=metric&appid=%s"
+    private val API_QUERY = "https://api.openweathermap.org/data/2.5/onecall?lat=%s&lon=%s&exclude=minutely,hourly,daily&lang=%s&units=metric&appid=%s"
 
     override val layout: Int
         get() = R.layout.fragment_weather
@@ -103,7 +103,7 @@ class WeatherFragment : TravelFragment(), RequestQueue.RequestEventListener {
         val waypoints = travel.route.waypoints
         loadingState.forEachIndexed { index, state ->
             if (state != SUCCESS) {
-                queue.add(this.createRequest(index, waypoints[index], travel.travel.endAt.time))
+                queue.add(this.createRequest(index, waypoints[index], travel.baseTravel.endAt.time))
             }
         }
     }

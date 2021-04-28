@@ -14,7 +14,7 @@ class TravelMenuItem(context: Context) : LinearLayout(context) {
         val formatted = DateFormat.getDateFormat(context)
         val fromView: TextView = findViewById(R.id.from)
         val toView: TextView = findViewById(R.id.to)
-        fromView.text = formatted.format(travel.travel.startAt)
-        toView.text = formatted.format(travel.travel.endAt)
+        fromView.text = formatted.format(travel.baseTravel.startAt)
+        toView.text = formatted.format(travel.baseTravel.endAt)
     }
 }

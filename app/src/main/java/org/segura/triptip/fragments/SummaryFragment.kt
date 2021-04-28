@@ -12,7 +12,7 @@ class SummaryFragment : TravelFragment() {
     override fun onTravelUpdate(root: View, item: Travel) {
         val textView: TextView = root.findViewById(R.id.title)
         travel.selectedItem.value?.let {
-            textView.text = it.travel.title
+            textView.text = it.baseTravel.title
         }
     }
 }

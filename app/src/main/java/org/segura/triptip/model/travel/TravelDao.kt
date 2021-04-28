@@ -30,21 +30,34 @@ abstract class TravelDao(val db: TravelDatabase) {
     abstract suspend fun selectOne(travelId: Int): Travel?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insert(travel: BaseTravel): Long
+    abstract suspend fun insert(baseTravel: BaseTravel): Long
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insert(preparingItem: PreparingItem): Long
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insert(travelToPreparingItemRef: TravelToPreparingItemRef): Long
 
     @Update
-    abstract fun update(travel: BaseTravel)
+    abstract fun update(baseTravel: BaseTravel)
+
+    @Update
+    abstract fun update(preparingItem: PreparingItem)
 
     suspend fun insert(travel: Travel) {
-        val travelId = insert(travel.travel)
+        val travelId = insert(travel.baseTravel)
         travel.route.route.travelId = travelId.toInt()
         val routeId = db.routeDao().insert(travel.route.route)
         for (waypoint in travel.route.waypoints) {
             val waypointId = db.routeDao().insert(waypoint)
             db.routeDao().insert(RouteWithWaypointRef(routeId.toInt(), waypointId.toInt()))
         }
+        for (preparingItem in travel.preparingList) {
+            val preparingId = db.travelDao().insert(preparingItem)
+            db.travelDao().insert(TravelToPreparingItemRef(travelId.toInt(), preparingId.toInt()))
+        }
     }
 
     @Delete
-    abstract suspend fun delete(travel: BaseTravel)
+    abstract suspend fun delete(baseTravel: BaseTravel)
 }

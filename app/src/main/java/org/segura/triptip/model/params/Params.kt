@@ -1,6 +1,5 @@
 package org.segura.triptip.model.params
 
-import androidx.room.Ignore
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -10,8 +9,6 @@ data class Params(
     val waterPerPeoplePerDay: Int,
     val comment: String
 ) {
-    @Ignore
-    fun getWater(): Int {
-        return people * days * waterPerPeoplePerDay
-    }
+    val water: Int
+        get() = people * days * waterPerPeoplePerDay
 }

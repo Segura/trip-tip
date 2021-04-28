@@ -30,8 +30,8 @@
         tools:layout="@layout/fragment_food" />
 
     <fragment
-        android:id="@+id/navigation_info"
-        android:name="org.segura.triptip.fragments.InfoFragment"
-        android:label="@string/info_title"
-        tools:layout="@layout/fragment_info" />
+        android:id="@+id/navigation_preparing"
+        android:name="org.segura.triptip.fragments.PreparingFragment"
+        android:label="@string/preparing_title"
+        tools:layout="@layout/fragment_preparing" />
 </navigation>

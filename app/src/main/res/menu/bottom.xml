@@ -23,8 +23,8 @@
         android:title="@string/food_title" />
 
     <item
-        android:id="@+id/navigation_info"
-        android:icon="@drawable/ic_information"
-        android:title="@string/info_title" />
+        android:id="@+id/navigation_preparing"
+        android:icon="@drawable/ic_preparing"
+        android:title="@string/preparing_title" />
 
 </menu>

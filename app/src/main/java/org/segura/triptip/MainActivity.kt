@@ -65,15 +65,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navigationView: NavigationView = findViewById(R.id.drawer_menu)
         travels.forEachIndexed { index, travel ->
             val icon = when (true) {
-                travel.travel.isBefore -> R.drawable.ic_before
-                travel.travel.isAfter -> R.drawable.ic_after
+                travel.baseTravel.isBefore -> R.drawable.ic_before
+                travel.baseTravel.isAfter -> R.drawable.ic_after
                 else -> R.drawable.ic_current
             }
             navigationView.menu.add(
                 R.id.trips,
-                R.id.travel_id_salt xor travel.travel.travelId,
+                R.id.travel_id_salt xor travel.baseTravel.travelId,
                 Menu.FIRST,
-                travel.travel.title
+                travel.baseTravel.title
             ).apply {
                 setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
                 setIcon(icon)
@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_summary, R.id.navigation_route, R.id.navigation_weather, R.id.navigation_food, R.id.navigation_info
+                R.id.navigation_summary, R.id.navigation_route, R.id.navigation_weather, R.id.navigation_food, R.id.navigation_preparing
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -129,7 +129,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.action_settings -> startActivity(Intent(this, SettingsActivity::class.java))
         }
         val possibleTravelId = item.itemId xor R.id.travel_id_salt
-        travels.find { it.travel.travelId == possibleTravelId }?.let {
+        travels.find { it.baseTravel.travelId == possibleTravelId }?.let {
             viewModel.selectItem(it)
         }
         drawerLayout.closeDrawers()

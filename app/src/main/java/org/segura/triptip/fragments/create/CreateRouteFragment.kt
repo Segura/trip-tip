@@ -34,7 +34,7 @@ class CreateRouteFragment : Fragment() {
         }
         val fragment = childFragmentManager.findFragmentById(R.id.map_fragment) as MapFragment
         fragment.waypoints.observe(viewLifecycleOwner, {
-            routeModel.waypoints.value = it.map { Waypoint(it.coordinates.latitude, it.coordinates.longitude, false) }
+            routeModel.waypoints.value = it.map { Waypoint(it.coordinates.latitude, it.coordinates.longitude) }
         })
         return root
     }
