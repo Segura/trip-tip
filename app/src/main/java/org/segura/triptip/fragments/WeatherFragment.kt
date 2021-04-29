@@ -58,6 +58,12 @@ class WeatherFragment : TravelFragment(), RequestQueue.RequestEventListener {
         return root
     }
 
+    override fun onPause() {
+        super.onPause()
+        queue.cancelAll { true }
+        activity.stopProgress()
+    }
+
     override fun onResume() {
         super.onResume()
         if (allFinished) {
@@ -77,22 +83,14 @@ class WeatherFragment : TravelFragment(), RequestQueue.RequestEventListener {
         startLoading()
     }
 
-    override fun onPause() {
-        super.onPause()
-        queue.cancelAll { true }
-        activity.stopProgress()
-    }
-
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putByteArray("loadingState", loadingState)
     }
 
     override fun onRequestEvent(request: Request<*>, event: Int) {
-        request.isCanceled
-        request.sequence
         if (request.isCanceled) {
-            loadingState[request.sequence] = IN_PROGRESS
+            loadingState[request.tag as Int] = IN_PROGRESS
         }
     }
 
@@ -126,7 +124,7 @@ class WeatherFragment : TravelFragment(), RequestQueue.RequestEventListener {
             }
         ).apply {
             this.cacheExpiredFrom = expiredFrom
-            this.sequence = index
+            this.tag = index
         }
     }
 
